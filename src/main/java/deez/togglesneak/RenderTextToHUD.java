@@ -14,11 +14,11 @@ public class RenderTextToHUD
     @SubscribeEvent
     public void RenderGameOverlayEvent(RenderGameOverlayEvent event)
     {   	
-    	if(event.type == RenderGameOverlayEvent.ElementType.TEXT)
+    	if(event.getType() == RenderGameOverlayEvent.ElementType.TEXT)
     	{
     		if(ToggleSneakMod.optionShowHUDText)
     		{
-    			mc.fontRendererObj.drawStringWithShadow(textForHUD, ToggleSneakMod.optionHUDTextPosX, ToggleSneakMod.optionHUDTextPosY, 0xffffff);
+    			mc.fontRenderer.drawStringWithShadow(textForHUD, ToggleSneakMod.optionHUDTextPosX, ToggleSneakMod.optionHUDTextPosY, 0xffffff);
     		}
     	}
     }

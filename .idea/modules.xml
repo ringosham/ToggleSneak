@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/ToggleSneak.iml" filepath="$PROJECT_DIR$/.idea/ToggleSneak.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ToggleSneak.api.iml" filepath="$PROJECT_DIR$/.idea/modules/ToggleSneak.api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ToggleSneak.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ToggleSneak.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ToggleSneak.test.iml" filepath="$PROJECT_DIR$/.idea/modules/ToggleSneak.test.iml" />
+    </modules>
+  </component>
+</project>

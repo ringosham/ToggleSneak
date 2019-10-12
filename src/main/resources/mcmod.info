@@ -1,19 +1,26 @@
 [
-{
-  "modid": "ToggleSneak",
-  "name": "ToggleSneak",
-  "description": "ToggleSneak v3.1.1 - Some Bugs Fixed!!",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "",
-  "updateUrl": "",
-  "authorList": ["deeznueces"],
-  "credits": "",
-  "logoFile": "",
-  "screenshots": [],
-  "requiredMods": ["PlayerAPI"],
-  "dependencies": ["PlayerAPI"],
-  "dependants": [],
-  "useDependencyInformation": true
-}
+  {
+    "modid": "togglesneak",
+    "name": "ToggleSneak",
+    "description": "ToggleSneak v3.1.1 - Some Bugs Fixed!!",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "deeznueces",
+      "Ringosham"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "requiredMods": [
+      "PlayerAPI"
+    ],
+    "dependencies": [
+      "PlayerAPI"
+    ],
+    "dependants": [],
+    "useDependencyInformation": true
+  }
 ]

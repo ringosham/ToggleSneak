@@ -17,9 +17,9 @@ public class ToggleSneakEvents
 	@SubscribeEvent
 	public void GuiOpenEvent(GuiOpenEvent event)
 	{
-		if(event.gui instanceof GuiOptions && mc.theWorld != null)
+		if(event.getGui() instanceof GuiOptions && mc.world != null)
 		{
-			event.gui = new GuiOptionsReplace(new GuiIngameMenu(), mc.gameSettings);
+			event.setGui(new GuiOptionsReplace(new GuiIngameMenu(), mc.gameSettings));
 		}
 	}
 }

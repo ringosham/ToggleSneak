@@ -22,7 +22,7 @@ import net.minecraftforge.common.config.Property;
 
 public class ToggleSneakMod
 {
-	public static final String	ModID		= "ToggleSneak";
+	public static final String	ModID		= "togglesneak";
 	public static final String	ModName		= "ToggleSneak";
 	public static final String	ModVersion	= "3.1.1";
 	
@@ -86,47 +86,47 @@ public class ToggleSneakMod
 		}
 		
 		property = config.get("ToggleSneak", "optionToggleSprint", optionToggleSprint);
-		property.comment = "If true, use Sprint Toggling - If false, use vanilla sprinting";
+		property.setComment("If true, use Sprint Toggling - If false, use vanilla sprinting");
 		if(isLoading)	optionToggleSprint = property.getBoolean(true);
 		else			property.set(optionToggleSprint);
 		
 		property = config.get("ToggleSneak", "optionToggleSneak", optionToggleSneak);
-		property.comment = "If true, use Sneak Toggling - If false, use vanilla sneaking";
+		property.setComment("If true, use Sneak Toggling - If false, use vanilla sneaking");
 		if(isLoading)	optionToggleSneak = property.getBoolean(true);
 		else			property.set(optionToggleSneak);
 		
 		property = config.get("ToggleSneak", "optionShowHUDText", optionShowHUDText);
-		property.comment = "Show movement status (Sneaking, Sprinting, etc) on the HUD.";
+		property.setComment("Show movement status (Sneaking, Sprinting, etc) on the HUD.");
 		if(isLoading)	optionShowHUDText = property.getBoolean(true);
 		else			property.set(optionShowHUDText);
 
 		property = config.get("ToggleSneak", "optionHUDTextPosX", optionHUDTextPosX);
-		property.comment = "Sets the horizontal position of the HUD Info. [Far Left = 1, Far Right = 400]";
+		property.setComment("Sets the horizontal position of the HUD Info. [Far Left = 1, Far Right = 400]");
 		if(isLoading)	optionHUDTextPosX = property.getInt();
 		else			property.set(optionHUDTextPosX);
 		
 		property = config.get("ToggleSneak", "optionHUDTextPosY", optionHUDTextPosY);
-		property.comment = "Sets the vertical position of the HUD Info. [Top Line = 1, Bottom Line = 200]";
+		property.setComment("Sets the vertical position of the HUD Info. [Top Line = 1, Bottom Line = 200]");
 		if(isLoading)	optionHUDTextPosY = property.getInt();
 		else			property.set(optionHUDTextPosY);
 		
 		property = config.get("ToggleSneak", "optionDoubleTap", optionDoubleTap);
-		property.comment = "Allow double-tapping the forward key (W) to begin sprinting";
+		property.setComment("Allow double-tapping the forward key (W) to begin sprinting");
 		if(isLoading)	optionDoubleTap = property.getBoolean(false);
 		else			property.set(optionDoubleTap);
 		
 		property = config.get("ToggleSneak", "optionEnableFlyBoost", optionEnableFlyBoost);
-		property.comment = "Enable speed boost when flying in creative mode";
+		property.setComment("Enable speed boost when flying in creative mode");
 		if(isLoading)	optionEnableFlyBoost = property.getBoolean(false);
 		else			property.set(optionEnableFlyBoost);
 		
 		property = config.get("ToggleSneak", "optionFlyBoostAmount", optionFlyBoostAmount);
-		property.comment = "The multiplier to use when boosting fly speed";
+		property.setComment("The multiplier to use when boosting fly speed");
 		if(isLoading)	optionFlyBoostAmount = property.getDouble(4.0);
 		else			property.set(optionFlyBoostAmount);
 		
 		property = config.get("ToggleSneak", "optionButtonPosition", optionButtonPosition);
-		property.comment = "The position of the options button on the options screen [Left Column = 1, Right Column = 2]";
+		property.setComment("The position of the options button on the options screen [Left Column = 1, Right Column = 2]");
 		if(isLoading)	optionButtonPosition = property.getInt();
 		else			property.set(optionButtonPosition);
 		

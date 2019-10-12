@@ -69,7 +69,7 @@ public class GuiSlideControl extends GuiButton
 		{
 			if(this.isSliding)
 			{
-				curValue = roundValue((float)(mousePosX - (xPosition + 4)) / (float)(width - 8));
+				curValue = roundValue((float)(mousePosX - (x + 4)) / (float)(width - 8));
 				
 				if(curValue < 0.0F)
 				{
@@ -84,8 +84,8 @@ public class GuiSlideControl extends GuiButton
 			}
 			
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			this.drawTexturedModalRect(xPosition + (int)(curValue * (float)(width - 8)), yPosition, 0, 66, 4, 20);
-			this.drawTexturedModalRect(xPosition + (int)(curValue * (float)(width - 8)) + 4, yPosition, 196, 66, 4, 20);
+			this.drawTexturedModalRect(x + (int)(curValue * (float)(width - 8)), y, 0, 66, 4, 20);
+			this.drawTexturedModalRect(x + (int)(curValue * (float)(width - 8)) + 4, y, 196, 66, 4, 20);
 		}
 	}
 	
@@ -94,7 +94,7 @@ public class GuiSlideControl extends GuiButton
 	{
 		if(super.mousePressed(mc, mousePosX, mousePosY))
 		{
-			curValue = roundValue((float)(mousePosX - (xPosition + 4)) / (float)(width - 8));
+			curValue = roundValue((float)(mousePosX - (x + 4)) / (float)(width - 8));
 			
 			if(curValue < 0.0F)
 			{

@@ -192,7 +192,7 @@ public class GuiTSConfig extends GuiScreen
 				if(changedShowHUD)	RenderTextToHUD.SetHUDText("");
 				
 				// Cancel ToggleSprint if active and update sprint status if disabled in-game
-				if(changedToggleSprint && mc.theWorld != null)	ToggleSneakMod.wasSprintDisabled = true;
+				if(changedToggleSprint && mc.world != null)	ToggleSneakMod.wasSprintDisabled = true;
 				
 				ToggleSneakMod.saveConfig();
 				
@@ -229,20 +229,20 @@ public class GuiTSConfig extends GuiScreen
 
 		this.drawDefaultBackground();
 		
-		this.drawCenteredString(this.fontRendererObj, "ToggleSneak Settings", this.width / 2, headerPos, 16777215);
+		this.drawCenteredString(this.fontRenderer, "ToggleSneak Settings", this.width / 2, headerPos, 16777215);
 		
-		this.drawString(fontRendererObj, lblToggleSneak,	this.width / 2 - 100 - this.fontRendererObj.getStringWidth(lblToggleSneak),		getRowPos(1) + 6, 16777215);
-		this.drawString(fontRendererObj, lblToggleSprint,	this.width / 2 + 100 - this.fontRendererObj.getStringWidth(lblToggleSprint),	getRowPos(1) + 6, 16777215);
-		this.drawString(fontRendererObj, lblShowHUDText,	this.width / 2 - 3 - this.fontRendererObj.getStringWidth(lblShowHUDText),		getRowPos(2) + 6, 16777215);
+		this.drawString(fontRenderer, lblToggleSneak,	this.width / 2 - 100 - this.fontRenderer.getStringWidth(lblToggleSneak),		getRowPos(1) + 6, 16777215);
+		this.drawString(fontRenderer, lblToggleSprint,	this.width / 2 + 100 - this.fontRenderer.getStringWidth(lblToggleSprint),	getRowPos(1) + 6, 16777215);
+		this.drawString(fontRenderer, lblShowHUDText,	this.width / 2 - 3 - this.fontRenderer.getStringWidth(lblShowHUDText),		getRowPos(2) + 6, 16777215);
 		
-		this.drawString(fontRendererObj, lblHUDTextPosX,	this.width / 2 - 3 - this.fontRendererObj.getStringWidth(lblHUDTextPosX),		getRowPos(3) + 6, 16777215);
-		this.drawString(fontRendererObj, lblHUDTextPosY,	this.width / 2 - 3 - this.fontRendererObj.getStringWidth(lblHUDTextPosY),		getRowPos(4) + 6, 16777215);
+		this.drawString(fontRenderer, lblHUDTextPosX,	this.width / 2 - 3 - this.fontRenderer.getStringWidth(lblHUDTextPosX),		getRowPos(3) + 6, 16777215);
+		this.drawString(fontRenderer, lblHUDTextPosY,	this.width / 2 - 3 - this.fontRenderer.getStringWidth(lblHUDTextPosY),		getRowPos(4) + 6, 16777215);
 		
-		this.drawString(fontRendererObj, lblDoubleTap,		this.width / 2 - 3 	 - this.fontRendererObj.getStringWidth(lblDoubleTap),		getRowPos(5) + 6, 16777215);
-		this.drawString(fontRendererObj, lblFlyBoost,		this.width / 2 - 115 - this.fontRendererObj.getStringWidth(lblFlyBoost),			getRowPos(6) + 6, 16777215);
-		this.drawString(fontRendererObj, lblFlyBoostAmount,	this.width / 2 + 50 - this.fontRendererObj.getStringWidth(lblFlyBoostAmount),	getRowPos(6) + 6, 16777215);
+		this.drawString(fontRenderer, lblDoubleTap,		this.width / 2 - 3 	 - this.fontRenderer.getStringWidth(lblDoubleTap),		getRowPos(5) + 6, 16777215);
+		this.drawString(fontRenderer, lblFlyBoost,		this.width / 2 - 115 - this.fontRenderer.getStringWidth(lblFlyBoost),			getRowPos(6) + 6, 16777215);
+		this.drawString(fontRenderer, lblFlyBoostAmount,	this.width / 2 + 50 - this.fontRenderer.getStringWidth(lblFlyBoostAmount),	getRowPos(6) + 6, 16777215);
 		
-		this.drawString(fontRendererObj, lblOptionsButton, this.width / 2 - 3 - this.fontRendererObj.getStringWidth(lblOptionsButton),		getRowPos(7) + 6, 16777215);
+		this.drawString(fontRenderer, lblOptionsButton, this.width / 2 - 3 - this.fontRenderer.getStringWidth(lblOptionsButton),		getRowPos(7) + 6, 16777215);
 		
 		super.drawScreen(mouseX, mouseY, partialTicks);
 	}
