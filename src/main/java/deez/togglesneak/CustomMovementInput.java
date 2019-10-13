@@ -150,6 +150,7 @@ public class CustomMovementInput {
             boolean isRiding = thisPlayer.isRiding();
             boolean isHoldingSneak = settings.keyBindSneak.isKeyDown();
             boolean isHoldingSprint = settings.keyBindSprint.isKeyDown();
+            boolean isElytraFlying = thisPlayer.isElytraFlying();
 
             if (isFlying) {
                 DecimalFormat numFormat = new DecimalFormat("#.00");
@@ -157,6 +158,10 @@ public class CustomMovementInput {
                     output += "[Flying (" + numFormat.format(ToggleSneakMod.optionFlyBoostAmount) + "x boost)]  ";
                 else output += "[Flying]  ";
             }
+
+            if (isElytraFlying)
+                output += "[Elytra flying]  ";
+
             if (isRiding) output += "[Riding]  ";
 
             if (options.sneak) {
