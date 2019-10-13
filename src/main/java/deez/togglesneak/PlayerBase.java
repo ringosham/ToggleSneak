@@ -15,7 +15,6 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemElytra;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.CPacketEntityAction;
-import net.minecraft.potion.Potion;
 import net.minecraft.util.MovementInputFromOptions;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;

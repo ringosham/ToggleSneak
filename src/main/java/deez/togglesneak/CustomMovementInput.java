@@ -18,6 +18,7 @@ public class CustomMovementInput {
     public boolean sprint = false;
     public boolean sprintHeldAndReleased = false;
     public boolean sprintDoubleTapped = false;
+    public static boolean sneak = false;
 
     private long lastPressed;
     private long lastSprintPressed;
@@ -63,16 +64,11 @@ public class CustomMovementInput {
                 // Descend if we are flying, note if we were riding (so we can unsneak once dismounted)
                 if (thisPlayer.isRiding() || thisPlayer.capabilities.isFlying) {
                     options.sneak = true;
-                    thisPlayer.connection.sendPacket(new CPacketEntityAction(thisPlayer, CPacketEntityAction.Action.START_SNEAKING));
+                    sneak = true;
                     this.wasRiding = thisPlayer.isRiding();
-					thisPlayer.connection.sendPacket(new CPacketEntityAction(thisPlayer, CPacketEntityAction.Action.STOP_SNEAKING));
                 } else {
                     options.sneak = !options.sneak;
-                    if (options.sneak) {
-						thisPlayer.connection.sendPacket(new CPacketEntityAction(thisPlayer, CPacketEntityAction.Action.START_SNEAKING));
-					} else {
-						thisPlayer.connection.sendPacket(new CPacketEntityAction(thisPlayer, CPacketEntityAction.Action.STOP_SNEAKING));
-					}
+                    sneak = options.sneak;
                 }
 
                 this.lastPressed = System.currentTimeMillis();
@@ -85,22 +81,19 @@ public class CustomMovementInput {
                 if (thisPlayer.capabilities.isFlying || this.wasRiding) {
                     options.sneak = false;
                     this.wasRiding = false;
+                    sneak = false;
                 }
                 // If the key was held down for more than 300ms, stop sneaking upon release.
                 else if (System.currentTimeMillis() - this.lastPressed > 300L) {
                     options.sneak = false;
-
+					sneak = false;
                 }
 
                 this.handledSneakPress = false;
             }
         } else {
             options.sneak = settings.keyBindSneak.isKeyDown();
-			if (options.sneak) {
-				thisPlayer.connection.sendPacket(new CPacketEntityAction(thisPlayer, CPacketEntityAction.Action.START_SNEAKING));
-			} else {
-				thisPlayer.connection.sendPacket(new CPacketEntityAction(thisPlayer, CPacketEntityAction.Action.STOP_SNEAKING));
-			}
+			sneak = options.sneak;
         }
 
         if (options.sneak) {
