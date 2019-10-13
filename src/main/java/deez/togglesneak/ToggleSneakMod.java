@@ -41,7 +41,7 @@ public class ToggleSneakMod
 	
 	public static boolean		wasSprintDisabled		= false;
 	
-	@Instance("ToggleSneak")
+	@Instance("togglesneak")
 	public static ToggleSneakMod instance;
 	
 	@SidedProxy
