@@ -16,6 +16,9 @@ public class RenderTextToHUD {
         if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT) {
             if (ToggleSneakMod.optionShowHUDText) {
                 mc.fontRenderer.drawStringWithShadow(textForHUD, ToggleSneakMod.optionHUDTextPosX, ToggleSneakMod.optionHUDTextPosY, 0xffffff);
+                //For debugging use
+//                mc.fontRenderer.drawStringWithShadow("Strafing speed: " + mc.player.movementInput.moveStrafe, ToggleSneakMod.optionHUDTextPosX , ToggleSneakMod.optionHUDTextPosY + 10, 0xffffff);
+//                mc.fontRenderer.drawStringWithShadow("Forward speed: " + mc.player.movementInput.moveForward, ToggleSneakMod.optionHUDTextPosX, ToggleSneakMod.optionHUDTextPosY + 20, 0xffffff);
             }
         }
     }

@@ -96,6 +96,8 @@ public class CustomMovementInput {
 			sneak = options.sneak;
         }
 
+        //This is certainly strange. If sneak is on hold this works fine.
+        //But if sneak is toggled, this will not apply. Maybe this is only applied every tick instead of every frame/millisecond?
         if (options.sneak) {
             options.moveStrafe = (float) ((double) options.moveStrafe * 0.3D);
             options.moveForward = (float) ((double) options.moveForward * 0.3D);

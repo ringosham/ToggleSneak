@@ -12,7 +12,7 @@ Requires PlayerAPI for 1.12. Obtainable in this [repository](https://github.com/
 
 ### Bug reports
 
-Please report them under [issues](https://github.com/ringosham/ToggleSneak/issues). Describe what went wrong and how do you reproduce it.
+Please report them under [issues](https://github.com/ringosham/ToggleSneak/issues). Describe what went wrong and how do you reproduce it. If it is a crash, please include your crash report as well.
 
 ### Pull requests
 
