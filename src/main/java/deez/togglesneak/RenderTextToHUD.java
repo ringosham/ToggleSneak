@@ -9,7 +9,7 @@ public class RenderTextToHUD {
     public static RenderTextToHUD instance = new RenderTextToHUD();
 
     private static Minecraft mc = Minecraft.getMinecraft();
-    private static String textForHUD = "";
+    private static String textForHUD = "The OG ToggleSneak :D";
 
     @SubscribeEvent
     public void RenderGameOverlayEvent(RenderGameOverlayEvent event) {

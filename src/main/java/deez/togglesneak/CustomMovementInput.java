@@ -84,7 +84,7 @@ public class CustomMovementInput {
                     sneak = false;
                 }
                 // If the key was held down for more than 300ms, stop sneaking upon release.
-                else if (System.currentTimeMillis() - this.lastPressed > 300L) {
+                else if (System.currentTimeMillis() - this.lastPressed > ToggleSneakMod.optionThreshold) {
                     options.sneak = false;
 					sneak = false;
                 }

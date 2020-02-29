@@ -184,6 +184,20 @@ public class PlayerBase extends ClientPlayerBase {
             }
         }
 
+        //If somehow sprinting isn't registered.
+        if (this.isSprinting() && !customMovementInput.sprint) {
+            if (canDoubleTap)
+                customMovementInput.UpdateSprint(true, true);
+            else
+                customMovementInput.UpdateSprint(true, false);
+        }
+        if (customMovementInput.sprint && !this.isSprinting()) {
+            if (canDoubleTap)
+                customMovementInput.UpdateSprint(true, true);
+            else
+                customMovementInput.UpdateSprint(true, false);
+        }
+
         /*
             End of ToggleSneak
          */

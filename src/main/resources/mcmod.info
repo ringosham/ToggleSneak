@@ -2,7 +2,7 @@
   {
     "modid": "togglesneak",
     "name": "ToggleSneak",
-    "description": "ToggleSneak v3.1.1 - Some Bugs Fixed!!",
+    "description": "The OG Toggle sneak",
     "version": "${version}",
     "mcversion": "${mcversion}",
     "url": "",
