@@ -2,15 +2,18 @@ package deez.togglesneak;
 
 import deez.togglesneak.gui.GuiOptionsReplace;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiIngameMenu;
 import net.minecraft.client.gui.GuiOptions;
 import net.minecraft.init.MobEffects;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.InputUpdateEvent;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
+
+import java.lang.reflect.Field;
 
 public class ToggleSneakEvents {
     public static ToggleSneakEvents instance = new ToggleSneakEvents();
@@ -19,6 +22,7 @@ public class ToggleSneakEvents {
 
     private long sneakPressStart;
     private long sprintPressStart;
+    private Field sprintToggleTimer;
 
     @SubscribeEvent
     public void GuiOpenEvent(GuiOpenEvent event) {
@@ -34,7 +38,15 @@ public class ToggleSneakEvents {
         //Ignore server side events
         if (event.side.isServer())
             return;
+        //Ignore other EntityPlayers in multiplayer
+        if (event.player instanceof EntityOtherPlayerMP)
+            return;
         EntityPlayerSP player = (EntityPlayerSP) event.player;
+        //In case EntityPlayerSP is not initialized yet
+        if (player == null)
+            return;
+        if (sprintToggleTimer == null)
+            sprintToggleTimer = ReflectionHelper.findField(EntityPlayerSP.class, "field_71156_d", "sprintToggleTimer");
         //Toggle sneak
         if (Minecraft.getMinecraft().gameSettings.keyBindSneak.isKeyDown() && sneakPressStart == 0) {
             sneakPressStart = System.currentTimeMillis();
@@ -99,13 +111,21 @@ public class ToggleSneakEvents {
 
         //Double Tapping sprint
         //Overwrite sprintToggleTimer. Double tapping W will set this to 7. Simply setting back to 0 every tick will disable double tapping.
-        if (!ToggleSneakMod.optionDoubleTap)
-            ObfuscationReflectionHelper.setPrivateValue(EntityPlayerSP.class, player, 0, "field_71156_d");
+        if (!ToggleSneakMod.optionDoubleTap) {
+            try {
+                sprintToggleTimer.set(player, 0);
+            } catch (IllegalAccessException ignored) {
+            }
+        }
 
         //Vanilla sprinting detection
         //E.g double tapping w, and releasing sprint button after holding it.
-        int sprintToggleTimer = ObfuscationReflectionHelper.getPrivateValue(EntityPlayerSP.class, player, "field_71156_d");
-        boolean vanillaSprint = (sprintToggleTimer == 7 || !Minecraft.getMinecraft().gameSettings.keyBindSprint.isKeyDown()) && player.isSprinting() && !Status.INSTANCE.isSprintToggled();
+        int doubleTapTimer = 0;
+        try {
+            doubleTapTimer = (int) sprintToggleTimer.get(player);
+        } catch (IllegalAccessException ignored) {
+        }
+        boolean vanillaSprint = (doubleTapTimer == 7 || !Minecraft.getMinecraft().gameSettings.keyBindSprint.isKeyDown()) && player.isSprinting() && !Status.INSTANCE.isSprintToggled();
         Status.INSTANCE.setSprintVanilla(vanillaSprint);
 
     }

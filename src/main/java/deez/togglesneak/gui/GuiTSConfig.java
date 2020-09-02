@@ -1,8 +1,6 @@
 package deez.togglesneak.gui;
 
-import deez.togglesneak.RenderTextToHUD;
 import deez.togglesneak.ToggleSneakMod;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 

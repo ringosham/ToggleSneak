@@ -1,11 +1,10 @@
 package deez.togglesneak.gui;
 
-import java.text.DecimalFormat;
-
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
+import org.lwjgl.opengl.GL11;
+
+import java.text.DecimalFormat;
 
 public class GuiSlideControl extends GuiButton
 {

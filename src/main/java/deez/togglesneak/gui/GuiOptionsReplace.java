@@ -1,13 +1,12 @@
 package deez.togglesneak.gui;
 
-import java.io.IOException;
-
 import deez.togglesneak.ToggleSneakMod;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptions;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.settings.GameSettings;
+
+import java.io.IOException;
 
 public class GuiOptionsReplace extends GuiOptions {
     private GuiButton btnToggleSneakOptions;

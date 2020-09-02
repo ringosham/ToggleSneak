@@ -1,5 +1,5 @@
 +----------------------------------------------+
-|   ToggleSneak v3.2.1 for Minecraft v1.12.2   |
+|   ToggleSneak v3.3 for Minecraft v1.12.2     |
 +----------------------------------------------+
 
 What you need to run ToggleSneak:
