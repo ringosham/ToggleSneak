@@ -1,16 +1,14 @@
-+--------------------------------------------+
-|   ToggleSneak v3.2.1 for Minecraft v1.80   |
-+--------------------------------------------+
++----------------------------------------------+
+|   ToggleSneak v3.3 for Minecraft v1.12.2     |
++----------------------------------------------+
 
 What you need to run ToggleSneak:
 
     1) Minecraft Forge for Minecraft 1.12 - Build 2768 or newer
-    2) PlayerAPI Core v1.0 for Minecraft Forge 1.12.2
-
 
 
 If you don't already have Minecraft Forge installed, go to the Download page at
-http://www.minecraftforge.net/forum/index.php?action=files and look on the top
+http://files.minecraftforge.net and look on the top
 part of the page for the 'Latest' build for Minecraft 1.12.
 
 Do not use the recommend build as there are certain functions not implemented for

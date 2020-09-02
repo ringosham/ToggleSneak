@@ -15,10 +15,8 @@
     "logoFile": "",
     "screenshots": [],
     "requiredMods": [
-      "PlayerAPI"
     ],
     "dependencies": [
-      "PlayerAPI"
     ],
     "dependants": [],
     "useDependencyInformation": true

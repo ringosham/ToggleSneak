@@ -34,10 +34,6 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    implementation files("libs/PlayerAPI-1.12.2-1.0.jar")
-}
-
 processResources {
     // this will ensure that this task is redone when the versions change.
     inputs.property "version", project.version

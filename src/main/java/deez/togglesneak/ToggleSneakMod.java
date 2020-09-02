@@ -1,30 +1,29 @@
 package deez.togglesneak;
 
-import java.io.File;
-
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.Mod.Instance;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import deez.togglesneak.proxy.CommonProxy;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+
+import java.io.File;
 
 @Mod
 (
 	modid = ToggleSneakMod.ModID,
 	name = ToggleSneakMod.ModName,
 	version = ToggleSneakMod.ModVersion,
-	guiFactory = "deez.togglesneak.gui.TSGuiFactoryHandler"
+	guiFactory = "deez.togglesneak.gui.TSGuiFactoryHandler",
+    clientSideOnly = true
 )
 
 public class ToggleSneakMod
 {
 	public static final String	ModID		= "togglesneak";
 	public static final String	ModName		= "ToggleSneak";
-	public static final String	ModVersion	= "3.1.1";
+	public static final String	ModVersion	= "3.3";
 
 	public static Configuration config					= null;
 	public static File			configFile				= null;
@@ -45,24 +44,13 @@ public class ToggleSneakMod
 	@Instance("togglesneak")
 	public static ToggleSneakMod instance;
 
-	@SidedProxy
-	(
-		clientSide = "deez.togglesneak.proxy.ClientProxy",
-		serverSide = "deez.togglesneak.proxy.CommonProxy"
-	)
-	public static CommonProxy proxy;
-
     @EventHandler
 	public void onPreInit(FMLPreInitializationEvent event)
 	{
 		updateConfig(event.getSuggestedConfigurationFile(), true);
-		proxy.registerEvents(event);
-	}
-
-	@EventHandler
-	public void init(FMLInitializationEvent event)
-	{
-		proxy.initMod();
+        MinecraftForge.EVENT_BUS.register(RenderTextToHUD.instance);
+        MinecraftForge.EVENT_BUS.register(ToggleSneakEvents.instance);
+        MinecraftForge.EVENT_BUS.register(PlayerEvent.instance);
 	}
 
 	public static void reloadConfig()
