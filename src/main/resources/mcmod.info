@@ -18,7 +18,6 @@
       "PlayerAPI"
     ],
     "dependencies": [
-      "PlayerAPI"
     ],
     "dependants": [],
     "useDependencyInformation": true

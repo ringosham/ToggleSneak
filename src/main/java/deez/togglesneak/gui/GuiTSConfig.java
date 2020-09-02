@@ -70,12 +70,12 @@ public class GuiTSConfig extends GuiScreen
 		this.buttonList.add(btnToggleSprint);
 		this.buttonList.add(btnShowHUDText);
 		
-		this.buttonList.add((GuiButton)sliderHUDTextPosX);
-		this.buttonList.add((GuiButton)sliderHUDTextPosY);
+		this.buttonList.add(sliderHUDTextPosX);
+		this.buttonList.add(sliderHUDTextPosY);
 		
 		this.buttonList.add(btnDoubleTap);
 		this.buttonList.add(btnFlyBoost);
-		this.buttonList.add((GuiButton)sliderFlyBoostAmount);
+		this.buttonList.add(sliderFlyBoostAmount);
 		
 		this.buttonList.add(btnOptionsButton);
 		this.buttonList.add(sliderThreshold);
@@ -86,7 +86,7 @@ public class GuiTSConfig extends GuiScreen
 	
 	public int getRowPos(int rowNumber)
 	{
-		return this.height / 4 + 0 + ((24 * rowNumber) - 24)   + byte0;
+		return this.height / 4 + ((24 * rowNumber) - 24) + byte0;
 	}
 	
 	@Override
@@ -94,16 +94,12 @@ public class GuiTSConfig extends GuiScreen
     {
         if (mouseButton == 0)
         {
-            for (int l = 0; l < this.buttonList.size(); ++l)
-            {
-                GuiButton guibutton = (GuiButton)this.buttonList.get(l);
-
-                if (guibutton.mousePressed(this.mc, mouseX, mouseY))
-                {
-                    lastPressed = guibutton;
-                    actionPerformed(guibutton);
-                }
-            }
+			for (GuiButton guibutton : this.buttonList) {
+				if (guibutton.mousePressed(this.mc, mouseX, mouseY)) {
+					lastPressed = guibutton;
+					actionPerformed(guibutton);
+				}
+			}
         }
     }
 	
@@ -196,9 +192,6 @@ public class GuiTSConfig extends GuiScreen
 				
 			// btnSaveSettings
 			case 100:
-				// Clear the HUD Text if HUD display was disabled in-game
-				if(changedShowHUD)	RenderTextToHUD.SetHUDText("");
-				
 				// Cancel ToggleSprint if active and update sprint status if disabled in-game
 				if(changedToggleSprint && mc.world != null)	ToggleSneakMod.wasSprintDisabled = true;
 				
