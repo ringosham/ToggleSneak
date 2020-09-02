@@ -4,6 +4,10 @@ The OG ToggleSneak back in 1.7.10. Supports toggling sneaking, sprinting, and fl
 
 Originally coded by u/ScrobDobbins. Updated by Ringosham for Minecraft 1.12.2
 
+## Legacy branch
+
+This branch contains most of the original legacy code, but updated to work on 1.12.2
+
 ## Downloads
 
 I don't use the release tab. Use the Curseforge link [here](https://www.curseforge.com/minecraft/mc-mods/togglesneak)
