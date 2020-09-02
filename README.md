@@ -2,7 +2,7 @@
 
 The OG ToggleSneak back in 1.7.10. Supports toggling sneaking, sprinting, and fly boosting.
 
-Originally coded by u/ScrobDobbins. Updated by Ringosham for Minecraft 1.12.2
+Originally coded by u/ScrobDobbins. Updated (and now mostly rewritten) by Ringosham for Minecraft 1.12.2
 
 ## Downloads
 
@@ -10,7 +10,11 @@ I don't use the release tab. Use the Curseforge link [here](https://www.cursefor
 
 ## Installing
 
-Requires PlayerAPI for 1.12. Obtainable in this [repository](https://github.com/Tommsy64/PlayerAPI/releases)
+Uses Forge
+
+Starting from version 3.3. No extra dependencies required
+
+Versions older than 3.3 requires PlayerAPI for 1.12. Obtainable in this [repository](https://github.com/Tommsy64/PlayerAPI/releases)
 
 ## Contributing
 
