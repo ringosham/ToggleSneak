@@ -3,7 +3,10 @@ ToggleSneak Changelog
 +------------------------------------------------------------------------------+
 |                         Version 3.3 - 02-09-2020                             |
 +------------------------------------------------------------------------------+
-- Mod rewritten to ditch PlayerAPI completely
+- Rewritten to ditch PlayerAPI completely
+ * The mod is now strictly event driven instead of modifying the base class to get it working
+ * Jar size drastically reduced as we no longer override the entire PlayerBase class
+ * Controls remain the same as the original
 - Fixed double tapping not working #6
 
 +------------------------------------------------------------------------------+

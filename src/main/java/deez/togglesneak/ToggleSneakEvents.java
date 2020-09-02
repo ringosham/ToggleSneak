@@ -27,6 +27,8 @@ public class ToggleSneakEvents {
         }
     }
 
+    //In order to handle key down durations, we must execute this in a tick loop.
+    //KeyInputEvent is simply too buggy and unreliable to detect key presses
     @SubscribeEvent
     public void onTick(TickEvent.PlayerTickEvent event) {
         //Ignore server side events
@@ -96,7 +98,7 @@ public class ToggleSneakEvents {
         Status.INSTANCE.setRidingDismount((player.isRiding() && Minecraft.getMinecraft().gameSettings.keyBindSneak.isKeyDown()));
 
         //Double Tapping sprint
-        //Overwrite sprintToggleTimer.
+        //Overwrite sprintToggleTimer. Double tapping W will set this to 7. Simply setting back to 0 every tick will disable double tapping.
         if (!ToggleSneakMod.optionDoubleTap)
             ObfuscationReflectionHelper.setPrivateValue(EntityPlayerSP.class, player, 0, "field_71156_d");
 
@@ -108,14 +110,14 @@ public class ToggleSneakEvents {
 
     }
 
-    //This event calls in every frame I believe
+    //This event calls in every tick I believe, but allows direct player movement manipulation.
     @SubscribeEvent
     public void onMovementUpdate(InputUpdateEvent event) {
         //Set the sneak flag to true in EntityPlayer does nothing. We have to manipulate the player's movements directly.
         if (Status.INSTANCE.isSneakToggled()) {
             //Sneak animation
             event.getMovementInput().sneak = true;
-            //Sneak walking speed. Without it you'll be sneaking at walking speed
+            //Slow down sneak walking speed. Without it you'll be sneaking at walking speed
             //Most anticheat will bounce you back and possibly ban without it.
             event.getMovementInput().moveStrafe = (float) ((double) event.getMovementInput().moveStrafe * 0.3D);
             event.getMovementInput().moveForward = (float) ((double) event.getMovementInput().moveForward * 0.3D);

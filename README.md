@@ -2,6 +2,8 @@
 
 The OG ToggleSneak back in 1.7.10. Supports toggling sneaking, sprinting, and fly boosting.
 
+The controls are tinkered to be the exact same as the original. Meaning the mod can determine between toggling and holding the sneak/sprint button without any extra hassle.
+
 Originally coded by u/ScrobDobbins. Updated (and now mostly rewritten) by Ringosham for Minecraft 1.12.2
 
 ## Downloads
