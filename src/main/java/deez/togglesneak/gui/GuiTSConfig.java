@@ -13,7 +13,6 @@ public class GuiTSConfig extends GuiScreen
 	private GuiButton btnShowHUDText;
 	private GuiButton btnDoubleTap;
 	private GuiButton btnFlyBoost;
-	private GuiButton btnOptionsButton;
 	private GuiButton btnSaveSettings;
 	private GuiButton btnCancelChanges;
 	
@@ -58,8 +57,6 @@ public class GuiTSConfig extends GuiScreen
 		this.sliderFlyBoostAmount = new GuiSlideControl(70, this.width / 2 + 57, getRowPos(6), 150, 20, "x", 0.0F, 10.0F, (float)ToggleSneakMod.optionFlyBoostAmount, false);
 
 		this.sliderThreshold = new GuiSlideControl(80, this.width / 2 + 57, getRowPos(7), 150, 20, "Milliseconds: ", 50.0f, 750.0f, (float)ToggleSneakMod.optionThreshold, false);
-		
-		this.btnOptionsButton	= new GuiButton(6, this.width / 2 - 113, getRowPos(7), 60, 20, ToggleSneakMod.optionButtonPosition == 1 ? "Left" : "Right");
 
 		this.btnSaveSettings	= new GuiButton(100, this.width / 2 - 155, footerPos, 150, 20, "Save Settings");
 		this.btnCancelChanges	= new GuiButton(110, this.width / 2 + 5,  footerPos, 150, 20, "Cancel Changes");
@@ -74,8 +71,7 @@ public class GuiTSConfig extends GuiScreen
 		this.buttonList.add(btnDoubleTap);
 		this.buttonList.add(btnFlyBoost);
 		this.buttonList.add(sliderFlyBoostAmount);
-		
-		this.buttonList.add(btnOptionsButton);
+
 		this.buttonList.add(sliderThreshold);
 		
 		this.buttonList.add(btnSaveSettings);
@@ -160,14 +156,6 @@ public class GuiTSConfig extends GuiScreen
 				ToggleSneakMod.optionEnableFlyBoost = !ToggleSneakMod.optionEnableFlyBoost;
 				this.btnFlyBoost.displayString = String.valueOf(ToggleSneakMod.optionEnableFlyBoost);
 				break;
-			
-			//btnOptionsButton
-			case 6:
-				if(ToggleSneakMod.optionButtonPosition == 0)		ToggleSneakMod.optionButtonPosition = 1;
-				else if(ToggleSneakMod.optionButtonPosition == 1)	ToggleSneakMod.optionButtonPosition = 0;
-				
-				this.btnOptionsButton.displayString = ToggleSneakMod.optionButtonPosition == 1 ? "Left" : "Right";
-				break;
 				
 			// sliderHUDTextPosX
 			case 50:
@@ -224,7 +212,6 @@ public class GuiTSConfig extends GuiScreen
 		String lblDoubleTap			= "Enable Double-Tapping";
 		String lblFlyBoost			= "Enable Fly Boost";
 		String lblFlyBoostAmount	= "Fly Boost Multiplier";
-		String lblOptionsButton		= "Options Button Location";
 		String lblHoldingThreshold  = "Holding threshold";
 
 		this.drawDefaultBackground();
@@ -241,8 +228,6 @@ public class GuiTSConfig extends GuiScreen
 		this.drawString(fontRenderer, lblDoubleTap,		this.width / 2 - 3 	 - this.fontRenderer.getStringWidth(lblDoubleTap),		getRowPos(5) + 6, 16777215);
 		this.drawString(fontRenderer, lblFlyBoost,		this.width / 2 - 115 - this.fontRenderer.getStringWidth(lblFlyBoost),			getRowPos(6) + 6, 16777215);
 		this.drawString(fontRenderer, lblFlyBoostAmount,	this.width / 2 + 50 - this.fontRenderer.getStringWidth(lblFlyBoostAmount),	getRowPos(6) + 6, 16777215);
-		
-		this.drawString(fontRenderer, lblOptionsButton, this.width / 2 - 115 - this.fontRenderer.getStringWidth(lblOptionsButton),		getRowPos(7) + 6, 16777215);
 
 		this.drawString(fontRenderer, lblHoldingThreshold, this.width / 2 + 50 - this.fontRenderer.getStringWidth(lblHoldingThreshold),  getRowPos(7) + 6, 16777215);
 		super.drawScreen(mouseX, mouseY, partialTicks);

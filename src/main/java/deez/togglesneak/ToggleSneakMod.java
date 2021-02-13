@@ -23,7 +23,7 @@ public class ToggleSneakMod
 {
 	public static final String	ModID		= "togglesneak";
 	public static final String	ModName		= "ToggleSneak";
-	public static final String	ModVersion	= "3.3";
+	public static final String	ModVersion	= "3.3.1";
 
 	public static Configuration config					= null;
 	public static File			configFile				= null;
@@ -36,7 +36,6 @@ public class ToggleSneakMod
 	public static boolean		optionDoubleTap			= false;
 	public static boolean		optionEnableFlyBoost	= false;
 	public static double		optionFlyBoostAmount	= 4.0;
-	public static int			optionButtonPosition	= 1;
 	public static int optionThreshold = 300;
 
 	public static boolean		wasSprintDisabled		= false;
@@ -113,11 +112,6 @@ public class ToggleSneakMod
 		property.setComment("The multiplier to use when boosting fly speed");
 		if(isLoading)	optionFlyBoostAmount = property.getDouble(4.0);
 		else			property.set(optionFlyBoostAmount);
-
-		property = config.get("ToggleSneak", "optionButtonPosition", optionButtonPosition);
-		property.setComment("The position of the options button on the options screen [Left Column = 1, Right Column = 2]");
-		if(isLoading)	optionButtonPosition = property.getInt();
-		else			property.set(optionButtonPosition);
 
 		property = config.get("ToggleSneak", "optionThreshold", optionThreshold);
 		property.setComment("The threshold in miliseconds to differentiate between holding or toggling sneak. It does not affect sprinting however.");

@@ -1,13 +1,9 @@
 package deez.togglesneak;
 
-import deez.togglesneak.gui.GuiOptionsReplace;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.gui.GuiIngameMenu;
-import net.minecraft.client.gui.GuiOptions;
 import net.minecraft.init.MobEffects;
-import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.InputUpdateEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -23,13 +19,6 @@ public class ToggleSneakEvents {
     private long sneakPressStart;
     private long sprintPressStart;
     private Field sprintToggleTimer;
-
-    @SubscribeEvent
-    public void GuiOpenEvent(GuiOpenEvent event) {
-        if (event.getGui() instanceof GuiOptions && mc.world != null) {
-            event.setGui(new GuiOptionsReplace(new GuiIngameMenu(), mc.gameSettings));
-        }
-    }
 
     //In order to handle key down durations, we must execute this in a tick loop.
     //KeyInputEvent is simply too buggy and unreliable to detect key presses
