@@ -3,6 +3,7 @@ ToggleSneak Changelog
 |                         Version 3.3.2 - 13-07-2021                           |
 +------------------------------------------------------------------------------+
 - Fixed sprinting while sneaking #11
+- Potentially fixed a problem where toggle sprint spontaneously stops working
 
 
 +------------------------------------------------------------------------------+
