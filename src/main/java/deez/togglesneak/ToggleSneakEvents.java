@@ -36,6 +36,8 @@ public class ToggleSneakEvents {
             return;
         if (sprintToggleTimer == null)
             sprintToggleTimer = ReflectionHelper.findField(EntityPlayerSP.class, "field_71156_d", "sprintToggleTimer");
+
+        boolean isSneaking = false;
         //Toggle sneak
         if (Minecraft.getMinecraft().gameSettings.keyBindSneak.isKeyDown() && sneakPressStart == 0) {
             sneakPressStart = System.currentTimeMillis();
@@ -48,16 +50,23 @@ public class ToggleSneakEvents {
             }
             sneakPressStart = 0;
         }
-        if (Minecraft.getMinecraft().gameSettings.keyBindSneak.isKeyDown() && !Status.INSTANCE.isSneakToggled())
+        if (Minecraft.getMinecraft().gameSettings.keyBindSneak.isKeyDown() && !Status.INSTANCE.isSneakToggled()) {
             Status.INSTANCE.setSneakHeld(true);
-        else if (Status.INSTANCE.isSneakToggled() || !Minecraft.getMinecraft().gameSettings.keyBindSneak.isKeyDown())
+            isSneaking = true;
+        } else if (Status.INSTANCE.isSneakToggled() || !Minecraft.getMinecraft().gameSettings.keyBindSneak.isKeyDown())
             Status.INSTANCE.setSneakHeld(false);
 
+        isSneaking = isSneaking | Status.INSTANCE.isSneakToggled();
         //Toggle sprint
-        //Disables sprinting when not enough hunger (unless creative), have blindness, using an item or the player is not moving.
+        //Disables sprinting when not enough hunger (unless creative), have blindness, using an item or the player is not moving, or is already sneaking
         //Hunger is ignored when in creative mode
-        if (Status.INSTANCE.isSprintToggled() && (player.getFoodStats().getFoodLevel() > 6 || player.isCreative()) && !player.isPotionActive(MobEffects.BLINDNESS) && player.movementInput.moveForward != 0 && !PlayerEvent.instance.isUseItem()) {
+        if (Status.INSTANCE.isSprintToggled() && (player.getFoodStats().getFoodLevel() > 6 || player.isCreative()) && !player.isPotionActive(MobEffects.BLINDNESS) && player.movementInput.moveForward != 0 && !PlayerEvent.instance.isUseItem() && !isSneaking) {
             player.setSprinting(true);
+            //Hopefully this should fix toggle sprint sometimes stops working
+            try {
+                sprintToggleTimer.set(player, 7);
+            } catch (IllegalAccessException ignored) {
+            }
         }
         if (Minecraft.getMinecraft().gameSettings.keyBindSprint.isKeyDown() && sprintPressStart == 0) {
             sprintPressStart = System.currentTimeMillis();

@@ -23,7 +23,7 @@ public class ToggleSneakMod
 {
 	public static final String	ModID		= "togglesneak";
 	public static final String	ModName		= "ToggleSneak";
-	public static final String	ModVersion	= "3.3.1";
+	public static final String	ModVersion	= "3.3.2";
 
 	public static Configuration config					= null;
 	public static File			configFile				= null;
