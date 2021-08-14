@@ -23,7 +23,7 @@ public class ToggleSneakMod
 {
 	public static final String	ModID		= "togglesneak";
 	public static final String	ModName		= "ToggleSneak";
-	public static final String	ModVersion	= "3.3.2";
+	public static final String	ModVersion	= "3.3.3";
 
 	public static Configuration config					= null;
 	public static File			configFile				= null;
@@ -49,7 +49,6 @@ public class ToggleSneakMod
 		updateConfig(event.getSuggestedConfigurationFile(), true);
         MinecraftForge.EVENT_BUS.register(RenderTextToHUD.instance);
         MinecraftForge.EVENT_BUS.register(ToggleSneakEvents.instance);
-        MinecraftForge.EVENT_BUS.register(PlayerEvent.instance);
 	}
 
 	public static void reloadConfig()

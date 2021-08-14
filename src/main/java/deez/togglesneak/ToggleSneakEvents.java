@@ -3,22 +3,27 @@ package deez.togglesneak;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.init.MobEffects;
 import net.minecraftforge.client.event.InputUpdateEvent;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 import java.lang.reflect.Field;
+import java.util.UUID;
 
 public class ToggleSneakEvents {
     public static ToggleSneakEvents instance = new ToggleSneakEvents();
 
-    protected static final Minecraft mc = Minecraft.getMinecraft();
-
     private long sneakPressStart;
     private long sprintPressStart;
     private Field sprintToggleTimer;
+    private Field activeItemStackUseCount;
 
     //In order to handle key down durations, we must execute this in a tick loop.
     //KeyInputEvent is simply too buggy and unreliable to detect key presses
@@ -32,10 +37,15 @@ public class ToggleSneakEvents {
             return;
         EntityPlayerSP player = (EntityPlayerSP) event.player;
         //In case EntityPlayerSP is not initialized yet
-        if (player == null)
+        if (player == null) {
+            sprintToggleTimer = null;
+            activeItemStackUseCount = null;
             return;
+        }
         if (sprintToggleTimer == null)
             sprintToggleTimer = ReflectionHelper.findField(EntityPlayerSP.class, "field_71156_d", "sprintToggleTimer");
+        if (activeItemStackUseCount == null)
+            activeItemStackUseCount = ReflectionHelper.findField(EntityLivingBase.class, "field_184628_bn", "activeItemStackUseCount");
 
         boolean isSneaking = false;
         //Toggle sneak
@@ -56,18 +66,24 @@ public class ToggleSneakEvents {
         } else if (Status.INSTANCE.isSneakToggled() || !Minecraft.getMinecraft().gameSettings.keyBindSneak.isKeyDown())
             Status.INSTANCE.setSneakHeld(false);
 
-        isSneaking = isSneaking | Status.INSTANCE.isSneakToggled();
+        isSneaking = isSneaking || Status.INSTANCE.isSneakToggled();
         //Toggle sprint
         //Disables sprinting when not enough hunger (unless creative), have blindness, using an item or the player is not moving, or is already sneaking
         //Hunger is ignored when in creative mode
-        if (Status.INSTANCE.isSprintToggled() && (player.getFoodStats().getFoodLevel() > 6 || player.isCreative()) && !player.isPotionActive(MobEffects.BLINDNESS) && player.movementInput.moveForward != 0 && !PlayerEvent.instance.isUseItem() && !isSneaking) {
-            player.setSprinting(true);
-            //Hopefully this should fix toggle sprint sometimes stops working
-            try {
-                sprintToggleTimer.set(player, 7);
-            } catch (IllegalAccessException ignored) {
-            }
+
+        //Obtain the use count via reflection (Basically if the player is using an item, like shields, food, bows, potions, etc.)
+        //Why not use Forge events?
+        //Because you can't detect if the player switches to another item while using it,
+        //essentially stopping using the item without trigger any of the forge events
+        int useCount = 0;
+        try {
+            useCount = (int) activeItemStackUseCount.get(player);
+        } catch (IllegalAccessException ignored) {
         }
+        if (Status.INSTANCE.isSprintToggled() && (player.getFoodStats().getFoodLevel() > 6 || player.isCreative()) && !player.isPotionActive(MobEffects.BLINDNESS) && player.movementInput.moveForward != 0 && useCount <= 0 && !isSneaking) {
+            player.setSprinting(true);
+        }
+
         if (Minecraft.getMinecraft().gameSettings.keyBindSprint.isKeyDown() && sprintPressStart == 0) {
             sprintPressStart = System.currentTimeMillis();
         } else if (!Minecraft.getMinecraft().gameSettings.keyBindSprint.isKeyDown()) {
