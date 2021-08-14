@@ -30,4 +30,4 @@ If you can make it more efficient, feel free to make a pull request.
 
 ## License
 
-This mod is licensed under MIT. Copyright owner goes to u/ScrobDobbins.
+This mod is licensed under MIT. Copyright goes to u/ScrobDobbins, Ringosham, and its contributors.
