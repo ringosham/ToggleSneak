@@ -23,7 +23,6 @@ public class ToggleSneakEvents {
     private long sneakPressStart;
     private long sprintPressStart;
     private Field sprintToggleTimer;
-    private Field activeItemStackUseCount;
 
     //In order to handle key down durations, we must execute this in a tick loop.
     //KeyInputEvent is simply too buggy and unreliable to detect key presses
@@ -39,13 +38,10 @@ public class ToggleSneakEvents {
         //In case EntityPlayerSP is not initialized yet
         if (player == null) {
             sprintToggleTimer = null;
-            activeItemStackUseCount = null;
             return;
         }
         if (sprintToggleTimer == null)
             sprintToggleTimer = ReflectionHelper.findField(EntityPlayerSP.class, "field_71156_d", "sprintToggleTimer");
-        if (activeItemStackUseCount == null)
-            activeItemStackUseCount = ReflectionHelper.findField(EntityLivingBase.class, "field_184628_bn", "activeItemStackUseCount");
 
         boolean isSneaking = false;
         //Toggle sneak
@@ -71,16 +67,11 @@ public class ToggleSneakEvents {
         //Disables sprinting when not enough hunger (unless creative), have blindness, using an item or the player is not moving, or is already sneaking
         //Hunger is ignored when in creative mode
 
-        //Obtain the use count via reflection (Basically if the player is using an item, like shields, food, bows, potions, etc.)
+        //Obtain the use count (Basically if the player is using an item, like shields, food, bows, potions, etc.)
         //Why not use Forge events?
         //Because you can't detect if the player switches to another item while using it,
         //essentially stopping using the item without trigger any of the forge events
-        int useCount = 0;
-        try {
-            useCount = (int) activeItemStackUseCount.get(player);
-        } catch (IllegalAccessException ignored) {
-        }
-        if (Status.INSTANCE.isSprintToggled() && (player.getFoodStats().getFoodLevel() > 6 || player.isCreative()) && !player.isPotionActive(MobEffects.BLINDNESS) && player.movementInput.moveForward != 0 && useCount <= 0 && !isSneaking) {
+        if (Status.INSTANCE.isSprintToggled() && (player.getFoodStats().getFoodLevel() > 6 || player.isCreative()) && !player.isPotionActive(MobEffects.BLINDNESS) && player.movementInput.moveForward != 0 && player.getItemInUseCount() <= 0 && !isSneaking) {
             player.setSprinting(true);
         }
 
