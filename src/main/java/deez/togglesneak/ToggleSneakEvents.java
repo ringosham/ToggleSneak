@@ -71,7 +71,7 @@ public class ToggleSneakEvents {
         //Why not use Forge events?
         //Because you can't detect if the player switches to another item while using it,
         //essentially stopping using the item without trigger any of the forge events
-        if (Status.INSTANCE.isSprintToggled() && (player.getFoodStats().getFoodLevel() > 6 || player.isCreative()) && !player.isPotionActive(MobEffects.BLINDNESS) && player.movementInput.moveForward != 0 && player.getItemInUseCount() <= 0 && !isSneaking) {
+        if (Status.INSTANCE.isSprintToggled() && (player.getFoodStats().getFoodLevel() > 6 || player.isCreative()) && !player.isPotionActive(MobEffects.BLINDNESS) && player.movementInput.moveForward > 0 && player.getItemInUseCount() <= 0 && !isSneaking) {
             player.setSprinting(true);
         }
 
