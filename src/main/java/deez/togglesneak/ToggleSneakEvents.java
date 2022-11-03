@@ -36,12 +36,12 @@ public class ToggleSneakEvents {
             sprintToggleTimer = null;
             return;
         }
-		//Ignore other EntityPlayers in multiplayer, or custom modded EntityPlayers
-		if (!(event.player instanceof EntityPlayerSP))
-			return;
+        //Ignore other EntityPlayers in multiplayer, or custom modded EntityPlayers
+        if (!(event.player instanceof EntityPlayerSP))
+            return;
 
-		EntityPlayerSP player = (EntityPlayerSP) event.player;
-		if (sprintToggleTimer == null)
+        EntityPlayerSP player = (EntityPlayerSP) event.player;
+        if (sprintToggleTimer == null)
             sprintToggleTimer = ReflectionHelper.findField(EntityPlayerSP.class, "field_71156_d", "sprintToggleTimer");
 
         boolean isSneaking = false;
