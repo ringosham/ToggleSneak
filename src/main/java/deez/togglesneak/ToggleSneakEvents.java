@@ -31,15 +31,16 @@ public class ToggleSneakEvents {
         //Ignore server side events
         if (event.side.isServer())
             return;
-        //Ignore other EntityPlayers in multiplayer
-        if (event.player instanceof EntityOtherPlayerMP)
-            return;
-        EntityPlayerSP player = (EntityPlayerSP) event.player;
         //In case EntityPlayerSP is not initialized yet
-        if (player == null) {
+        if (event.player == null) {
             sprintToggleTimer = null;
             return;
         }
+        //Ignore other EntityPlayers in multiplayer, or custom modded EntityPlayers
+        if (!(event.player instanceof EntityPlayerSP))
+            return;
+
+        EntityPlayerSP player = (EntityPlayerSP) event.player;
         if (sprintToggleTimer == null)
             sprintToggleTimer = ReflectionHelper.findField(EntityPlayerSP.class, "field_71156_d", "sprintToggleTimer");
 
