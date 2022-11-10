@@ -1,21 +1,14 @@
 package deez.togglesneak;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.init.MobEffects;
 import net.minecraftforge.client.event.InputUpdateEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 import java.lang.reflect.Field;
-import java.util.UUID;
 
 public class ToggleSneakEvents {
     public static ToggleSneakEvents instance = new ToggleSneakEvents();
@@ -42,7 +35,7 @@ public class ToggleSneakEvents {
 
         EntityPlayerSP player = (EntityPlayerSP) event.player;
         if (sprintToggleTimer == null)
-            sprintToggleTimer = ReflectionHelper.findField(EntityPlayerSP.class, "field_71156_d", "sprintToggleTimer");
+            sprintToggleTimer = ObfuscationReflectionHelper.findField(EntityPlayerSP.class, "field_71156_d");
 
         boolean isSneaking = false;
         //Toggle sneak

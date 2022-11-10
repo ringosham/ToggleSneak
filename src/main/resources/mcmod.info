@@ -3,7 +3,7 @@
     "modid": "togglesneak",
     "name": "ToggleSneak",
     "description": "The OG Toggle sneak",
-    "version": "${version}",
+    "version": "3.3.5",
     "mcversion": "${mcversion}",
     "url": "",
     "updateUrl": "",
