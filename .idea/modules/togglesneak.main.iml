@@ -5,6 +5,7 @@
       <configuration>
         <autoDetectTypes>
           <platformType>FORGE</platformType>
+          <platformType>MIXIN</platformType>
           <platformType>MCP</platformType>
         </autoDetectTypes>
       </configuration>
@@ -12,9 +13,9 @@
   </component>
   <component name="McpModuleSettings">
     <option name="mappingFile" value="C:\Users\ringo\Desktop\Minecraft\Mod development\ToggleSneak\build\createMcpToSrg\output.tsrg" />
-    <option name="mcpVersion" value="stable_39-1.12" />
-    <option name="minecraftVersion" value="1.12.2" />
-    <option name="platformVersion" value="14.23.5.2860" />
+    <option name="mcpVersion" value="snapshot_20210309-1.16.5" />
+    <option name="minecraftVersion" value="1.16.5" />
+    <option name="platformVersion" value="36.2.34" />
     <option name="srgType" value="TSRG" />
   </component>
 </module>

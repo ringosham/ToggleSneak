@@ -1,22 +1,18 @@
-package deez.togglesneak;
+package deez.togglesneak.hud;
 
-import ibxm.Player;
+import deez.togglesneak.config.ToggleSneakConfig;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.init.MobEffects;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class RenderTextToHUD {
-    public static RenderTextToHUD instance = new RenderTextToHUD();
-
-    private static final Minecraft mc = Minecraft.getMinecraft();
+    private static final Minecraft mc = Minecraft.getInstance();
 
     @SubscribeEvent
     public void RenderGameOverlayEvent(RenderGameOverlayEvent event) {
         if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT) {
-            if (ToggleSneakMod.optionShowHUDText) {
-                mc.fontRenderer.drawStringWithShadow(Status.INSTANCE.getStatusString(), ToggleSneakMod.optionHUDTextPosX, ToggleSneakMod.optionHUDTextPosY, 0xffffff);
+            if (ToggleSneakConfig.getInstance().getOptionShowHUDText().get()) {
+                mc.fontRenderer.drawStringWithShadow(event.getMatrixStack(), Status.INSTANCE.getStatusString(), ToggleSneakConfig.getInstance().getOptionHUDTextPosX().get(), ToggleSneakConfig.getInstance().getOptionHUDTextPosY().get(), 0xffffff);
                 //For debugging use
 //                mc.fontRenderer.drawStringWithShadow("Strafing speed: " + mc.player.movementInput.moveStrafe, ToggleSneakMod.optionHUDTextPosX , ToggleSneakMod.optionHUDTextPosY + 10, 0xffffff);
 //                mc.fontRenderer.drawStringWithShadow("Forward speed: " + mc.player.movementInput.moveForward, ToggleSneakMod.optionHUDTextPosX, ToggleSneakMod.optionHUDTextPosY + 20, 0xffffff);

@@ -1,6 +1,8 @@
-package deez.togglesneak;
+package deez.togglesneak.hud;
 
-import static deez.togglesneak.Status.StatusText.*;
+import deez.togglesneak.config.ToggleSneakConfig;
+
+import static deez.togglesneak.hud.Status.StatusText.*;
 
 public class Status {
     public static final Status INSTANCE = new Status();
@@ -17,6 +19,8 @@ public class Status {
     private boolean elytra;
     private boolean riding;
     private boolean ridingDismount;
+    private boolean swimming;
+    private boolean crouching;
 
     public boolean isFly() {
         return fly;
@@ -98,19 +102,37 @@ public class Status {
         this.ridingDismount = ridingDismount;
     }
 
+    public void setSwimming(boolean swimming) {
+        this.swimming = swimming;
+    }
+
+    public void setCrouching(boolean crouching) {
+        this.crouching = crouching;
+    }
+
+    public boolean isCrouching() {
+        return crouching;
+    }
+
     public String getStatusString() {
-        if (!ToggleSneakMod.optionShowHUDText)
+        if (!ToggleSneakConfig.getInstance().getOptionShowHUDText().get())
             return "";
         StringBuilder builder = new StringBuilder();
         //On flight
         if (flyBoost)
-            builder.append(String.format(FLY_BOOST.toString(), ToggleSneakMod.optionFlyBoostAmount));
+            builder.append(String.format(FLY_BOOST.toString(), ToggleSneakConfig.getInstance().getOptionFlyBoostAmount().get()));
         else if (fly)
             builder.append(FLY);
         if ((sneakHeld || sneakToggled) && fly)
             builder.append(" ").append(FLY_DESCEND);
         if (elytra)
             builder.append(ELYTRA);
+        //Swimming
+        if (swimming)
+            builder.append(SWIMMING);
+        //Crouching
+        if (crouching)
+            builder.append(CROUCHING);
         //On ground
         if (!fly) {
             if (sneakHeld)
@@ -147,7 +169,9 @@ public class Status {
         SPRINT_VANILLA("[Sprinting (Vanilla)] "),
         ELYTRA("[Elytra flying] "),
         RIDING("[Riding]"),
-        RIDING_DISMOUNT("[Dismounting]");
+        RIDING_DISMOUNT("[Dismounting]"),
+        CROUCHING("[Crouching] "),
+        SWIMMING("[Swimming] ");
 
         private final String text;
 
