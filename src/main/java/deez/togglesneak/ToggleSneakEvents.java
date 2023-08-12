@@ -126,8 +126,6 @@ public class ToggleSneakEvents {
         // The definition of crouching internally is different
         // In code, crouching is defined when you are in the process of getting in or out of a 1 block hold
         // The "crouching" we see is actually a swimming pose, except the player is not in water
-        // Also, the player also crouches for a brief moment when climbing a ladder while a trapdoor is closed directly above
-        // We have to ignore that because we'll get the player stuck in a crouching state
         Status.INSTANCE.setCrouching(player.getPose() == Pose.SWIMMING && !player.isInWater() && !player.isElytraFlying() && !player.isOnLadder());
 
         //Double Tapping sprint
@@ -155,7 +153,7 @@ public class ToggleSneakEvents {
     @SubscribeEvent
     public void onMovementUpdate(InputUpdateEvent event) {
         //Set the sneak flag to true in EntityPlayer does nothing. We have to manipulate the player's movements directly.
-        if (Status.INSTANCE.isSneakToggled() || (Status.INSTANCE.isCrouching())) {
+        if (Status.INSTANCE.isSneakToggled()) {
             event.getMovementInput().sneaking = true;
         }
     }

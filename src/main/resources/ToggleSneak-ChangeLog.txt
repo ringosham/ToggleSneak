@@ -1,5 +1,9 @@
 ToggleSneak Changelog
 +------------------------------------------------------------------------------+
+|                         Version 3.3.8 - 13-08-2023                           |
++------------------------------------------------------------------------------+
+- Fixed player not being able to crouch out of elevated 1 block high spaces
++------------------------------------------------------------------------------+
 |                         Version 3.3.7 - 04-08-2023                           |
 +------------------------------------------------------------------------------+
 - Fixed player being stuck at 1 block height climbing ladders when closing a trapdoor from above
