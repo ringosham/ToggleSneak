@@ -28,6 +28,7 @@ gradle-app.setting
 .idea/runConfigurations/
 .idea/modules.xml
 .idea/.name
+.idea/modules/
 
 # Generated files
 .idea/**/contentModel.xml
