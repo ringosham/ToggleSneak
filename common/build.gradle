@@ -1,0 +1,9 @@
+plugins {
+    id "fabric-loom"
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.mcVersion}"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+}

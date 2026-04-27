@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "deez.togglesneak.mixin",
+  "refMap": "togglesneak.refmap.json",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "KeyboardInputMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

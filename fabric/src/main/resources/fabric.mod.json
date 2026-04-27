@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "togglesneak",
+  "version": "${version}",
+  "name": "ToggleSneak",
+  "description": "The OG ToggleSneak",
+  "authors": [
+    "deeznueces",
+    "Ringosham"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/togglesneak/icon.png",
+  "environment": "*",
+  "mixins": ["togglesneak.mixins.json"],
+  "entrypoints": {
+    "client": [
+      "deez.togglesneak.FabricToggleSneakMod"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.5",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
