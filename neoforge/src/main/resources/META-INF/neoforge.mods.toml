@@ -4,8 +4,8 @@ license = "MIT"
 
 [[mods]]
 modId = "togglesneak"
-version = "${file.jarVersion}"
-displayName = "ToggleSneak"
+version = "${version}"
+displayName = "Togglesneak"
 authors = "deeznueces, Ringosham"
 description = "The OG ToggleSneak"
 
@@ -24,4 +24,4 @@ description = "The OG ToggleSneak"
     side = "BOTH"
 
 [[mixins]]
-config = "deez/togglesneak/mixin/KeyboardInputMixin.json"
+config = "togglesneak.mixins.json"
