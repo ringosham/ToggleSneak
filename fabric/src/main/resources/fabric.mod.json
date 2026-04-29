@@ -10,7 +10,6 @@
   ],
   "contact": {},
   "license": "MIT",
-  "icon": "assets/togglesneak/icon.png",
   "environment": "*",
   "mixins": ["togglesneak.mixins.json"],
   "entrypoints": {

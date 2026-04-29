@@ -1,5 +1,11 @@
 ToggleSneak Changelog
 +------------------------------------------------------------------------------+
+|                         Version 3.3.9 - 29-04-2026                           |
++------------------------------------------------------------------------------+
+- Updated to Minecraft 1.21.11. Supports Fabric and Neoforge from now on
+- Fixed the janky way of how toggle sneak work. Bridging should be possible now
+- Double tap sprint is removed in the config. It's a vanilla feature now
++------------------------------------------------------------------------------+
 |                         Version 3.3.8 - 13-08-2023                           |
 +------------------------------------------------------------------------------+
 - Fixed player not being able to crouch out of elevated 1 block high spaces
