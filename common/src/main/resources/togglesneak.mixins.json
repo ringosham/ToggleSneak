@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "deez.togglesneak.mixin",
+  "mixins": [
+    "KeyboardInputMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "ControlsScreenMixin"
+  ]
+}

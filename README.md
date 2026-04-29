@@ -2,19 +2,31 @@
 
 The OG ToggleSneak back in 1.7.10/1.8. Supports toggling sneaking, sprinting, and fly boosting.
 
-The controls are tinkered to be the exact same as the original. Meaning the mod can determine between toggling and holding the sneak/sprint button without any extra hassle.
+The controls are tinkered to be the exact same as the original. You can hold the sneak/sprint key just slightly longer (configurable) to toggle sneak or sprint.
+
+Sneaking stays on while the GUI is turned on unlike the vanilla behaviour.
 
 Originally coded by u/ScrobDobbins. Updated (and now mostly rewritten) by Ringosham
 
 ## Downloads
 
-I don't use the release tab. Use the Curseforge link [here](https://www.curseforge.com/minecraft/mc-mods/togglesneak)
+Download in [Curseforge](https://www.curseforge.com/minecraft/mc-mods/togglesneak)
 
 ## Installing
 
-Uses Forge
+Put the jar in mods/ folder
 
-Versions older than 3.3 requires PlayerAPI for 1.12. Obtainable in this [repository](https://github.com/Tommsy64/PlayerAPI/releases)
+Requires Neoforge or Fabric in Minecraft 1.21.11+
+
+Requires Forge in Minecraft 1.16.5 and before
+
+For Minecraft 1.12, versions older than 3.3 requires PlayerAPI in addition. Obtainable in this [repository](https://github.com/Tommsy64/PlayerAPI/releases)
+
+## Configuration
+
+You can access the configuration of the mod using the command `/togglesneak`
+
+In Minecraft 1.16.5 and before, the config is available in the "Mod settings" in the title screen and pause menu.
 
 ## Contributing
 

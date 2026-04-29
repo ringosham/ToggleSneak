@@ -1,0 +1,27 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "MIT"
+
+[[mods]]
+modId = "togglesneak"
+version = "${version}"
+displayName = "Togglesneak"
+authors = "deeznueces, Ringosham"
+description = "The OG ToggleSneak"
+
+[[dependencies.togglesneak]]
+    modId = "neoforge"
+    type = "required"
+    versionRange = "[21.1,)"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.togglesneak]]
+    modId = "minecraft"
+    type = "required"
+    versionRange = "[1.21.1,)"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[mixins]]
+config = "togglesneak.mixins.json"
