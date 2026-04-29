@@ -53,7 +53,7 @@ public class ToggleSneakEvents {
         if (Status.INSTANCE.isSprintToggled()
                 && (player.getFoodData().getFoodLevel() > 6 || player.getAbilities().instabuild)
                 && !player.hasEffect(MobEffects.BLINDNESS)
-                && player.zza > 0
+                && player.input.hasForwardImpulse()
                 && !player.isUsingItem()
                 && !isSneaking
                 && !(player.getPose() == Pose.SWIMMING && !player.isInWater() && !player.isFallFlying())) {
