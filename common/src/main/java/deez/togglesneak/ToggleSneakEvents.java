@@ -2,15 +2,14 @@ package deez.togglesneak;
 
 import deez.togglesneak.config.TSConfig;
 import deez.togglesneak.hud.Status;
-import deez.togglesneak.mixin.LocalPlayerMixin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.world.entity.Pose;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.phys.Vec3;
 
 public class ToggleSneakEvents {
-    private long sneakPressStart;
+    private long sneakPressTicks;
     private long sprintPressStart;
 
     public void onTick(LocalPlayer player) {
@@ -22,16 +21,18 @@ public class ToggleSneakEvents {
         boolean isSneaking = false;
 
         // Toggle sneak
-        if (mc.options.keyShift.isDown() && sneakPressStart == 0) {
-            sneakPressStart = System.currentTimeMillis();
-        } else if (!mc.options.keyShift.isDown()) {
-            if (sneakPressStart != 0) {
-                long diff = System.currentTimeMillis() - sneakPressStart;
-                if (diff < TSConfig.getInstance().optionThreshold * 50L && !Status.INSTANCE.isRidingDismount() && TSConfig.getInstance().optionToggleSneak) {
-                    Status.INSTANCE.setSneakToggled(!Status.INSTANCE.isSneakToggled());
-                }
-                sneakPressStart = 0;
+        if (mc.options.keyShift.isDown()) {
+            sneakPressTicks++;
+        }
+        // Instead of comparing timestamps, counting ticks fixed a lot of issues with rapid sneaking.
+        // This should allow fast bridging again
+        if (!mc.options.keyShift.isDown()) {
+            if (sneakPressTicks >= TSConfig.getInstance().optionThreshold && !Status.INSTANCE.isRidingDismount() && TSConfig.getInstance().optionToggleSneak) {
+                Status.INSTANCE.setSneakToggled(!Status.INSTANCE.isSneakToggled());
+            } else if (Status.INSTANCE.isSneakToggled() && sneakPressTicks != 0) {
+                Status.INSTANCE.setSneakToggled(false);
             }
+            sneakPressTicks = 0;
         }
 
         if (mc.options.keyShift.isDown() && !Status.INSTANCE.isSneakToggled()) {
@@ -40,6 +41,11 @@ public class ToggleSneakEvents {
         } else {
             Status.INSTANCE.setSneakHeld(false);
         }
+
+        // Disable toggle sneak if the player is swimming
+        // Otherwise the player would get stuck at the edge of blocks
+        if (player.isSwimming())
+            Status.INSTANCE.setSneakToggled(false);
 
         isSneaking = isSneaking || Status.INSTANCE.isSneakToggled();
 
@@ -54,6 +60,8 @@ public class ToggleSneakEvents {
             player.setSprinting(true);
         }
 
+        // This still uses the old code
+        // If it ain't broke, don't fix it
         if (mc.options.keySprint.isDown() && sprintPressStart == 0) {
             sprintPressStart = System.currentTimeMillis();
         } else if (!mc.options.keySprint.isDown()) {
@@ -66,11 +74,7 @@ public class ToggleSneakEvents {
             }
         }
 
-        if (mc.options.keySprint.isDown() && !Status.INSTANCE.isSprintToggled()) {
-            Status.INSTANCE.setSprintHeld(true);
-        } else {
-            Status.INSTANCE.setSprintHeld(false);
-        }
+        Status.INSTANCE.setSprintHeld(mc.options.keySprint.isDown() && !Status.INSTANCE.isSprintToggled());
 
         // Fly boost
         if (player.getAbilities().flying && player.getAbilities().instabuild && mc.options.keySprint.isDown() && TSConfig.getInstance().optionEnableFlyBoost) {
@@ -92,12 +96,7 @@ public class ToggleSneakEvents {
         Status.INSTANCE.setRiding(player.getVehicle() != null);
         Status.INSTANCE.setRidingDismount(player.getVehicle() != null && mc.options.keyShift.isDown());
         Status.INSTANCE.setSwimming(player.isSwimming());
-        Status.INSTANCE.setCrouching(player.getPose() == Pose.SWIMMING && !player.isInWater() && !player.isFallFlying());
-
-        // Double Tap
-        if (!TSConfig.getInstance().optionDoubleTap) {
-            ((LocalPlayerMixin) player).setSprintTriggerTime(0);
-        }
+        Status.INSTANCE.setCrawling(player.getPose() == Pose.SWIMMING && !player.isInWater() && !player.isFallFlying());
 
         boolean vanillaSprint = player.isSprinting() && !Status.INSTANCE.isSprintToggled();
         Status.INSTANCE.setSprintVanilla(vanillaSprint);

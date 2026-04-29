@@ -3,28 +3,27 @@ package deez.togglesneak.config;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import org.jspecify.annotations.NonNull;
 
 import java.util.function.Consumer;
 
 public class TSConfigScreen extends Screen {
-    private final Screen parent;
     private final TSConfig config = TSConfig.getInstance();
 
     private boolean optionToggleSneak = config.optionToggleSneak;
     private boolean optionToggleSprint = config.optionToggleSprint;
     private boolean optionShowHUDText = config.optionShowHUDText;
-    private boolean optionDoubleTap = config.optionDoubleTap;
     private boolean optionFlyBoost = config.optionEnableFlyBoost;
     private double optionFlyBoostAmount = config.optionFlyBoostAmount;
     private int optionHUDTextPosX = config.optionHUDTextPosX;
     private int optionHUDTextPosY = config.optionHUDTextPosY;
     private int optionThreshold = config.optionThreshold;
 
-    public TSConfigScreen(Screen parent) {
+    public TSConfigScreen() {
         super(Component.literal("ToggleSneak Config"));
-        this.parent = parent;
     }
 
     @Override
@@ -50,28 +49,26 @@ public class TSConfigScreen extends Screen {
         }).bounds(this.width / 2 + 2, getRowPos(2), 60, 20).build());
 
         // HUD Text X Pos
-        this.addRenderableWidget(new SimpleSlider(this.width / 2 + 2, getRowPos(3), 150, 20, Component.literal("X Pos: "), 1, 400, this.optionHUDTextPosX, (val) -> this.optionHUDTextPosX = val.intValue(), Component.empty()));
+        this.addRenderableWidget(new SimpleSlider(this.width / 2 + 2, getRowPos(3), 150, 20, Component.literal("X Pos: "), 1, 400, this.optionHUDTextPosX,
+                (val) -> this.optionHUDTextPosX = val.intValue(), Component.empty()));
 
         // HUD Text Y Pos
-        this.addRenderableWidget(new SimpleSlider(this.width / 2 + 2, getRowPos(4), 150, 20, Component.literal("Y Pos: "), 1, 200, this.optionHUDTextPosY, (val) -> this.optionHUDTextPosY = val.intValue(), Component.empty()));
-
-        // Double Tap
-        this.addRenderableWidget(Button.builder(Component.literal(String.valueOf(this.optionDoubleTap)), (button) -> {
-            this.optionDoubleTap = !this.optionDoubleTap;
-            button.setMessage(Component.literal(String.valueOf(this.optionDoubleTap)));
-        }).bounds(this.width / 2 + 2, getRowPos(5), 60, 20).build());
+        this.addRenderableWidget(new SimpleSlider(this.width / 2 + 2, getRowPos(4), 150, 20, Component.literal("Y Pos: "), 1, 200, this.optionHUDTextPosY,
+                (val) -> this.optionHUDTextPosY = val.intValue(), Component.empty()));
 
         // Fly Boost
         this.addRenderableWidget(Button.builder(Component.literal(String.valueOf(this.optionFlyBoost)), (button) -> {
             this.optionFlyBoost = !this.optionFlyBoost;
             button.setMessage(Component.literal(String.valueOf(this.optionFlyBoost)));
-        }).bounds(this.width / 2 - 113, getRowPos(6), 60, 20).build());
+        }).bounds(this.width / 2 - 113, getRowPos(6), 60, 20).tooltip(Tooltip.create(Component.literal("Fly boosting only works in creative mode"))).build());
 
         // Fly Boost Amount
-        this.addRenderableWidget(new SimpleSlider(this.width / 2 + 57, getRowPos(6), 150, 20, Component.literal("x"), 1.0, 10.0, this.optionFlyBoostAmount, (val) -> this.optionFlyBoostAmount = val, Component.empty()));
+        this.addRenderableWidget(new SimpleSlider(this.width / 2 + 57, getRowPos(6), 150, 20, Component.literal("x"), 1.0, 10.0, this.optionFlyBoostAmount,
+                (val) -> this.optionFlyBoostAmount = val, Component.empty(), Tooltip.create(Component.literal("Some servers may not like fly boosting at very high speed. Be careful with this option"))));
 
         // Holding Threshold
-        this.addRenderableWidget(new SimpleSlider(this.width / 2 + 57, getRowPos(7), 150, 20, Component.literal(""), 2, 20, this.optionThreshold, (val) -> this.optionThreshold = val.intValue(), Component.literal(" tick(s)")));
+        this.addRenderableWidget(new SimpleSlider(this.width / 2 + 57, getRowPos(7), 150, 20, Component.literal(""), 1, 10, this.optionThreshold,
+                (val) -> this.optionThreshold = val.intValue() + 1, Component.literal(" tick(s)"), Tooltip.create(Component.literal("How long to hold the sneak button to toggle. Each tick is 50ms"))));
 
         // Save
         this.addRenderableWidget(Button.builder(Component.literal("Save Settings"), (button) -> {
@@ -89,7 +86,6 @@ public class TSConfigScreen extends Screen {
         config.optionToggleSneak = this.optionToggleSneak;
         config.optionToggleSprint = this.optionToggleSprint;
         config.optionShowHUDText = this.optionShowHUDText;
-        config.optionDoubleTap = this.optionDoubleTap;
         config.optionEnableFlyBoost = this.optionFlyBoost;
         config.optionFlyBoostAmount = this.optionFlyBoostAmount;
         config.optionThreshold = this.optionThreshold;
@@ -103,44 +99,32 @@ public class TSConfigScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
+    public void render(@NonNull GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
         super.render(graphics, mouseX, mouseY, partialTicks);
 
         int headerPos = this.height / 4 - 52;
-        graphics.drawCenteredString(this.font, "ToggleSneak Settings", this.width / 2, headerPos, 0xFFFFFF);
+        graphics.drawCenteredString(this.font, "ToggleSneak Settings", this.width / 2, headerPos, 0xFFFFFFFF);
 
         String lblToggleSneak = "Enable ToggleSneak";
         String lblToggleSprint = "Enable ToggleSprint";
         String lblShowHUDText = "Show status on HUD";
         String lblHUDTextPosX = "Horizontal HUD Location";
         String lblHUDTextPosY = "Vertical HUD Location";
-        String lblDoubleTap = "Enable Double-Tapping";
         String lblFlyBoost = "Enable Fly Boost";
         String lblFlyBoostAmount = "Fly Boost Multiplier";
-        String lblHoldingThreshold = "Holding threshold";
+        String lblHoldingThreshold = "Sneak toggle threshold";
 
-        graphics.drawString(this.font, lblToggleSneak, this.width / 2 - 100 - this.font.width(lblToggleSneak), getRowPos(1) + 6, 0xFFFFFF);
-        graphics.drawString(this.font, lblToggleSprint, this.width / 2 + 100 - this.font.width(lblToggleSprint), getRowPos(1) + 6, 0xFFFFFF);
-        graphics.drawString(this.font, lblShowHUDText, this.width / 2 - 3 - this.font.width(lblShowHUDText), getRowPos(2) + 6, 0xFFFFFF);
+        graphics.drawString(this.font, lblToggleSneak, this.width / 2 - 100 - this.font.width(lblToggleSneak), getRowPos(1) + 6, 0xFFFFFFFF);
+        graphics.drawString(this.font, lblToggleSprint, this.width / 2 + 100 - this.font.width(lblToggleSprint), getRowPos(1) + 6, 0xFFFFFFFF);
+        graphics.drawString(this.font, lblShowHUDText, this.width / 2 - 3 - this.font.width(lblShowHUDText), getRowPos(2) + 6, 0xFFFFFFFF);
 
-        graphics.drawString(this.font, lblHUDTextPosX, this.width / 2 - 3 - this.font.width(lblHUDTextPosX), getRowPos(3) + 6, 0xFFFFFF);
-        graphics.drawString(this.font, lblHUDTextPosY, this.width / 2 - 3 - this.font.width(lblHUDTextPosY), getRowPos(4) + 6, 0xFFFFFF);
+        graphics.drawString(this.font, lblHUDTextPosX, this.width / 2 - 3 - this.font.width(lblHUDTextPosX), getRowPos(3) + 6, 0xFFFFFFFF);
+        graphics.drawString(this.font, lblHUDTextPosY, this.width / 2 - 3 - this.font.width(lblHUDTextPosY), getRowPos(4) + 6, 0xFFFFFFFF);
 
-        graphics.drawString(this.font, lblDoubleTap, this.width / 2 - 3 - this.font.width(lblDoubleTap), getRowPos(5) + 6, 0xFFFFFF);
-        graphics.drawString(this.font, lblFlyBoost, this.width / 2 - 115 - this.font.width(lblFlyBoost), getRowPos(6) + 6, 0xFFFFFF);
-        graphics.drawString(this.font, lblFlyBoostAmount, this.width / 2 + 50 - this.font.width(lblFlyBoostAmount), getRowPos(6) + 6, 0xFFFFFF);
+        graphics.drawString(this.font, lblFlyBoost, this.width / 2 - 115 - this.font.width(lblFlyBoost), getRowPos(6) + 6, 0xFFFFFFFF);
+        graphics.drawString(this.font, lblFlyBoostAmount, this.width / 2 + 50 - this.font.width(lblFlyBoostAmount), getRowPos(6) + 6, 0xFFFFFFFF);
 
-        graphics.drawString(this.font, lblHoldingThreshold, this.width / 2 + 50 - this.font.width(lblHoldingThreshold), getRowPos(7) + 6, 0xFFFFFF);
-    }
-
-    @Override
-    public void renderBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
-        this.renderMenuBackground(graphics);
-    }
-
-    @Override
-    public void onClose() {
-        this.minecraft.setScreen(parent);
+        graphics.drawString(this.font, lblHoldingThreshold, this.width / 2 + 50 - this.font.width(lblHoldingThreshold), getRowPos(7) + 6, 0xFFFFFFFF);
     }
 
     private static class SimpleSlider extends AbstractSliderButton {
@@ -158,6 +142,11 @@ public class TSConfigScreen extends Screen {
             this.max = max;
             this.callback = callback;
             this.updateMessage();
+        }
+
+        public SimpleSlider(int x, int y, int width, int height, Component prefix, double min, double max, double defaultValue, Consumer<Double> callback, Component suffix, Tooltip tooltip) {
+            this(x, y, width, height, prefix, min, max, defaultValue, callback, suffix);
+            this.setTooltip(tooltip);
         }
 
         @Override

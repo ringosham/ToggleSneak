@@ -18,7 +18,7 @@ public class Status {
     private boolean riding;
     private boolean ridingDismount;
     private boolean swimming;
-    private boolean crouching;
+    private boolean crawling;
 
     public boolean isFly() { return fly; }
     public void setFly(boolean fly) { this.fly = fly; }
@@ -41,8 +41,8 @@ public class Status {
     public boolean isRidingDismount() { return ridingDismount; }
     public void setRidingDismount(boolean ridingDismount) { this.ridingDismount = ridingDismount; }
     public void setSwimming(boolean swimming) { this.swimming = swimming; }
-    public void setCrouching(boolean crouching) { this.crouching = crouching; }
-    public boolean isCrouching() { return crouching; }
+    public void setCrawling(boolean crawling) { this.crawling = crawling; }
+    public boolean isCrawling() { return crawling; }
 
     public String getStatusString() {
         if (!TSConfig.getInstance().optionShowHUDText)
@@ -59,8 +59,8 @@ public class Status {
             builder.append(StatusText.ELYTRA);
         if (swimming)
             builder.append(StatusText.SWIMMING);
-        if (crouching)
-            builder.append(StatusText.CROUCHING);
+        if (crawling)
+            builder.append(StatusText.CRAWLING);
         
         if (!fly) {
             if (sneakHeld)
@@ -98,7 +98,7 @@ public class Status {
         ELYTRA("[Gliding] "),
         RIDING("[Riding]"),
         RIDING_DISMOUNT("[Dismounting]"),
-        CROUCHING("[Crouching] "),
+        CRAWLING("[Crawling] "),
         SWIMMING("[Swimming] ");
 
         private final String text;

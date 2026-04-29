@@ -16,7 +16,6 @@ public class TSConfig {
     public boolean optionToggleSprint = true;
     public boolean optionToggleSneak = true;
     public boolean optionShowHUDText = true;
-    public boolean optionDoubleTap = false;
     public boolean optionEnableFlyBoost = false;
     public double optionFlyBoostAmount = 4.0;
     public int optionThreshold = 5;
