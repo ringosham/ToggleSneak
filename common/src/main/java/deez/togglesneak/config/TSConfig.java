@@ -14,7 +14,8 @@ public class TSConfig {
     private static TSConfig instance;
 
     public boolean optionToggleSprint = true;
-    public boolean optionToggleSneak = true;
+    // 0 = Off, 1 = Long press to toggle (default), 2 = Short press to toggle
+    public int optionSneakMode = 1;
     public boolean optionShowHUDText = true;
     public boolean optionEnableFlyBoost = false;
     public double optionFlyBoostAmount = 4.0;

@@ -25,12 +25,27 @@ public class ToggleSneakEvents {
             sneakPressTicks++;
         }
         // Instead of comparing timestamps, counting ticks fixed a lot of issues with rapid sneaking.
-        // This should allow fast bridging again
+        // This should allow speedbridging again
         if (!mc.options.keyShift.isDown()) {
-            if (sneakPressTicks >= TSConfig.getInstance().optionThreshold && !Status.INSTANCE.isRidingDismount() && TSConfig.getInstance().optionToggleSneak) {
-                Status.INSTANCE.setSneakToggled(!Status.INSTANCE.isSneakToggled());
-            } else if (Status.INSTANCE.isSneakToggled() && sneakPressTicks != 0) {
-                Status.INSTANCE.setSneakToggled(false);
+            int sneakMode = TSConfig.getInstance().optionSneakMode;
+            if (sneakMode == 1) {
+                // Long-press to toggle: hold >= threshold ticks to toggle on
+                if (sneakPressTicks >= TSConfig.getInstance().optionThreshold && !Status.INSTANCE.isRidingDismount()) {
+                    Status.INSTANCE.setSneakToggled(!Status.INSTANCE.isSneakToggled());
+                } else if (Status.INSTANCE.isSneakToggled() && sneakPressTicks != 0) {
+                    Status.INSTANCE.setSneakToggled(false);
+                }
+            } else if (sneakMode == 2) {
+                // Short-press to toggle: tap < threshold ticks to toggle (original 1.8 behaviour)
+                // Caveat: This prevents speedbridging or anything that spams sneak.
+                if (sneakPressTicks > 0 && sneakPressTicks < TSConfig.getInstance().optionThreshold && !Status.INSTANCE.isRidingDismount()) {
+                    Status.INSTANCE.setSneakToggled(!Status.INSTANCE.isSneakToggled());
+                }
+            } else {
+                // clear any stale toggle state on key press
+                if (Status.INSTANCE.isSneakToggled() && sneakPressTicks != 0) {
+                    Status.INSTANCE.setSneakToggled(false);
+                }
             }
             sneakPressTicks = 0;
         }
